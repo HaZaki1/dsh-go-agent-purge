@@ -1,0 +1,11 @@
+# dsh-go-agent-purge bundle patch
+- id: system-prompt
+  config:
+    includeHarnessIdentity: false
+    personaPrefix: ""
+    personaSuffix: ""
+
+- insert:
+    - id: dsh-go-agent-purge
+      name: dsh-go-agent-purge
+      inject: [systemPrompt, tools]

@@ -1,0 +1,35 @@
+{
+  "name": "dsh-go-agent-purge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "agent-purge 的 dsh-go 执行端：读同一份 state.json / personas，按 strict/replace/append 注入系统提示词；不放行审批、不改权限。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": ["lib", "cordis.patch.yml", "README.md", "docs"],
+  "scripts": { "test": "node --test test/*.test.js" },
+  "engines": { "node": ">=22.19", "dsh": ">=0.2.1-rc.2 <0.3.0-0" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+  "dshGo": {
+    "v": 1,
+    "title": { "zh": "Agent Purge", "en": "Agent Purge" },
+    "icon": "sparkle",
+    "contributes": {
+      "composer.actions": [
+        { "id": "apgo.status", "label": { "zh": "状态", "en": "Status" }, "icon": "info" },
+        { "id": "apgo.persona", "label": { "zh": "人设", "en": "Persona" }, "icon": "user" }
+      ],
+      "composer.strip": [{ "id": "apgo.strip", "icon": "sparkle", "panel": "apgo.main" }],
+      "panels": [
+        { "id": "apgo.main", "title": { "zh": "Agent Purge", "en": "Agent Purge" }, "icon": "sparkle", "placement": ["session.tab", "features", "chat.panel"], "presentation": "sheet" }
+      ],
+      "session.actions": [{ "id": "apgo.copy", "label": { "zh": "复制人设", "en": "Copy persona" }, "icon": "copy" }]
+    }
+  },
+  "keywords": ["dsh-plugin", "dsh-bundle", "dsh-go", "agent-purge", "persona"],
+  "license": "MIT"
+}
